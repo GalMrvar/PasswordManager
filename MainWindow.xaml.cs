@@ -24,5 +24,33 @@ namespace PasswordManager
         {
             InitializeComponent();
         }
+
+        #region Methods
+        private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonUnlock_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        #endregion
     }
 }
