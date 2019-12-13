@@ -28,7 +28,9 @@ namespace PasswordManager
         #region Methods
         private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
         {
-
+            DetailsWindow window = new DetailsWindow();
+            window.Show();
+            
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
