@@ -20,15 +20,21 @@ namespace PasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
         #region Methods
+        /// <summary>
+        /// Add new button event for adding new passwords
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
         {
-            DetailsWindow window = new DetailsWindow();
+            DetailsWindow window = new DetailsWindow(); //add new constructor
             window.Show();
             
         }
@@ -38,9 +44,15 @@ namespace PasswordManager
 
         }
 
+        /// <summary>
+        /// event for unlocking passwords 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonUnlock_Click(object sender, RoutedEventArgs e)
         {
-
+            UnlockWindow unlockWindow = new UnlockWindow();
+            unlockWindow.ShowDialog();
         }
 
         private void MenuOpen_Click(object sender, RoutedEventArgs e)

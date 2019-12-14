@@ -25,6 +25,7 @@ namespace PasswordManager
         /// <param name="id"></param>
         public DetailsWindow(int id)
         {
+            Title = "Edit password";
             InitializeComponent();
         }
 
