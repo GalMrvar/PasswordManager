@@ -36,7 +36,6 @@ namespace PasswordManager
         {
             DetailsWindow window = new DetailsWindow(); //add new constructor
             window.ShowDialog();
-            
         }
 
         /// <summary>
@@ -65,9 +64,15 @@ namespace PasswordManager
 
         }
 
+        /// <summary>
+        /// On save option click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
-
+            SetMasterPasswordWindow window = new SetMasterPasswordWindow();
+            window.ShowDialog();
         }
 
         #endregion
