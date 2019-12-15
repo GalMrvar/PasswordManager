@@ -19,6 +19,16 @@ namespace PasswordManager
     /// </summary>
     public partial class DetailsWindow : Window
     {
+        #region fields
+
+        private bool passwordHidden = true;
+        private string password;
+        private string name;
+
+        #endregion
+
+        #region constructors
+
         /// <summary>
         /// Constructor to edit
         /// </summary>
@@ -38,14 +48,88 @@ namespace PasswordManager
             InitializeComponent();
         }
 
+        #endregion
+
+        #region Properties
+
+        /// <summary>
+        /// Get set for password
+        /// </summary>
+        public string Password
+        {
+            get
+            {
+                return this.password;
+            }
+            set
+            {
+                if (value.Length > 0)
+                    this.password = value;
+            }
+        }
+
+        /// <summary>
+        /// Get set for name
+        /// </summary>
+        public string GetName
+        {
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                if (value.Length > 0)
+                    this.name = value;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// On button save event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-
+            if (PasswordBox.Password.Length > 0 && TextBox.Text.Length > 0)
+            {
+                password = PasswordBox.Password;
+                name = TextBox.Text;
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("password or name can't be empty", "Wrong input", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
+        /// <summary>
+        /// On button show click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonShow_Click(object sender, RoutedEventArgs e)
         {
-            //https://stackoverflow.com/questions/31040510/c-sharp-wpf-unmask-password-inside-the-passwordbox
+            if (passwordHidden)
+            {
+                TextBox.Text = PasswordBox.Password;
+                PasswordBox.Visibility = System.Windows.Visibility.Hidden;
+                TextBox.Visibility = System.Windows.Visibility.Visible;
+                passwordHidden = false;
+            }
+            else
+            {
+                PasswordBox.Password = TextBox.Text;
+                TextBox.Visibility = System.Windows.Visibility.Hidden;
+                PasswordBox.Visibility = System.Windows.Visibility.Visible;
+                passwordHidden = true;
+            }
         }
+
+        #endregion
     }
 }

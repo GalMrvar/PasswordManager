@@ -35,10 +35,15 @@ namespace PasswordManager
         private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
         {
             DetailsWindow window = new DetailsWindow(); //add new constructor
-            window.Show();
+            window.ShowDialog();
             
         }
 
+        /// <summary>
+        /// Delete button event, deletes password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
 
