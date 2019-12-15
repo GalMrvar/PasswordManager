@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -59,9 +60,25 @@ namespace PasswordManager
             unlockWindow.ShowDialog();
         }
 
+        /// <summary>
+        /// To open saved files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MenuOpen_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "XML Files (*.xml)|*.xml"; //only for xml
 
+            string fileName;
+
+            if ((bool)openFileDialog1.ShowDialog())
+            {
+                fileName = openFileDialog1.FileName;  //important
+                string errorMsg = string.Empty;
+                //if (!mainFormController.EstateManager.BinaryDeserialize(fileName))
+                 //   MessageBox.Show("something went wrong please check for correct extension or corrupted file");
+            }
         }
 
         /// <summary>
@@ -73,6 +90,21 @@ namespace PasswordManager
         {
             SetMasterPasswordWindow window = new SetMasterPasswordWindow();
             window.ShowDialog();
+
+            string fileName;
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "XML Files (*.xml)|*.xml"; //only for xml
+            saveFileDialog1.DefaultExt = "xml";
+            saveFileDialog1.AddExtension = true;
+
+            if ((bool)saveFileDialog1.ShowDialog())
+            {
+                fileName = saveFileDialog1.FileName;  //important
+
+                //if (!mainFormController.EstateManager.BinarySerialize(fileName))
+                  //  MessageBox.Show("Something went wrong");
+            }
         }
 
         #endregion
