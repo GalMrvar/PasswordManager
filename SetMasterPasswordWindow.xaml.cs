@@ -62,7 +62,8 @@ namespace PasswordManager
         {
             if (PasswordBox1.Password.Equals(PasswordBox2.Password))
             {
-                this.Close();
+                masterPassword = PasswordBox1.Password;
+                this.DialogResult = true;
             }
             else
             {

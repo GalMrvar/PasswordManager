@@ -21,9 +21,11 @@ namespace PasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainController mainController;
 
         public MainWindow()
         {
+            mainController = new MainController();
             InitializeComponent();
         }
 
@@ -89,8 +91,10 @@ namespace PasswordManager
         private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
             SetMasterPasswordWindow window = new SetMasterPasswordWindow();
-            window.ShowDialog();
+            if ((bool)window.ShowDialog() == false)
+                return;
 
+            mainController.PasswordManager.MasterPassword = window.MasterPassword;
             string fileName;
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
@@ -102,8 +106,8 @@ namespace PasswordManager
             {
                 fileName = saveFileDialog1.FileName;  //important
 
-                //if (!mainFormController.EstateManager.BinarySerialize(fileName))
-                  //  MessageBox.Show("Something went wrong");
+                if (!mainController.SavePaswords(fileName))
+                    MessageBox.Show("Something went wrong");
             }
         }
 
