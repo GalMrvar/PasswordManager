@@ -12,8 +12,16 @@ namespace PasswordManager
 
         #endregion
 
+        #region constructor
+        public MainController()
+        {
+            passwordManager = new PasswordManager();
+        }
+
+        #endregion
+
         #region Properties
-        
+
         /// <summary>
         /// Get set for password manager
         /// </summary>

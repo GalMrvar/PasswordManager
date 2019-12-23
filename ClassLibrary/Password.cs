@@ -17,9 +17,18 @@ namespace PasswordManager
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
         public Password()
         {
 
+        }
+
+        public Password(string name, string password)
+        {
+            this.name = name;
+            this.password = password;
         }
         #endregion
 

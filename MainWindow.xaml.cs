@@ -21,13 +21,21 @@ namespace PasswordManager
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region fields
+
         private MainController mainController;
+
+        #endregion
+
+        #region construcotr 
 
         public MainWindow()
         {
             mainController = new MainController();
             InitializeComponent();
         }
+
+        #endregion
 
         #region Methods
         /// <summary>
@@ -38,7 +46,18 @@ namespace PasswordManager
         private void ButtonAddNew_Click(object sender, RoutedEventArgs e)
         {
             DetailsWindow window = new DetailsWindow(); //add new constructor
-            window.ShowDialog();
+            if ((bool)window.ShowDialog() == false)
+                return;
+            else
+            {
+                Password pas = new Password(window.GetName, window.Password);
+                if (mainController.PasswordManager.AddIfPossible(pas))
+                    return;
+                else
+                {
+                    MessageBox.Show("Password with that name already exists");
+                }
+            }
         }
 
         /// <summary>
