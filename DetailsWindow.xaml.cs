@@ -95,11 +95,14 @@ namespace PasswordManager
         /// <param name="e"></param>
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
-            if (PasswordBox.Password.Length > 0 && TextBox.Text.Length > 0)
+            if (PasswordBox.Password.Length > 0 || TextBox.Text.Length > 0)
             {
-                password = PasswordBox.Password;
-                name = TextBox.Text;
-                this.Close();
+                if (passwordHidden)
+                    password = TextBox.Text;
+                else
+                    password = PasswordBox.Password;
+                name = TextBoxName.Text;
+                this.DialogResult = true;
             }
             else
             {
@@ -119,6 +122,7 @@ namespace PasswordManager
                 TextBox.Text = PasswordBox.Password;
                 PasswordBox.Visibility = System.Windows.Visibility.Hidden;
                 TextBox.Visibility = System.Windows.Visibility.Visible;
+                ButtonShow.Content = "Hide";
                 passwordHidden = false;
             }
             else
@@ -126,6 +130,7 @@ namespace PasswordManager
                 PasswordBox.Password = TextBox.Text;
                 TextBox.Visibility = System.Windows.Visibility.Hidden;
                 PasswordBox.Visibility = System.Windows.Visibility.Visible;
+                ButtonShow.Content = "Show";
                 passwordHidden = true;
             }
         }
