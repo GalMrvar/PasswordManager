@@ -33,10 +33,13 @@ namespace PasswordManager
         /// Constructor to edit
         /// </summary>
         /// <param name="id"></param>
-        public DetailsWindow(int id)
+        public DetailsWindow(Password pas)
         {
             Title = "Edit password";
             InitializeComponent();
+            password = pas.VisiblePassword;
+            name = pas.Name;
+            UpdateGUI();
         }
 
         /// <summary>
@@ -89,6 +92,15 @@ namespace PasswordManager
         #region Methods
 
         /// <summary>
+        /// Updating gui
+        /// </summary>
+        private void UpdateGUI()
+        {
+            PasswordBox.Password = password;
+            TextBoxName.Text = name;
+        }
+
+        /// <summary>
         /// On button save event
         /// </summary>
         /// <param name="sender"></param>
@@ -97,7 +109,7 @@ namespace PasswordManager
         {
             if (PasswordBox.Password.Length > 0 || TextBox.Text.Length > 0)
             {
-                if (passwordHidden)
+                if (!passwordHidden)
                     password = TextBox.Text;
                 else
                     password = PasswordBox.Password;

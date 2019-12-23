@@ -93,6 +93,11 @@ namespace PasswordManager
         {
             UnlockWindow unlockWindow = new UnlockWindow();
             unlockWindow.ShowDialog();
+            if ((bool)unlockWindow.ShowDialog())
+            {
+                mainController.PasswordManager.MasterPassword = unlockWindow.MasterPassword;
+                mainController.PasswordManager.DecryptPasswords();
+            }
         }
 
         /// <summary>
@@ -144,11 +149,37 @@ namespace PasswordManager
             }
         }
 
-        #endregion
+        /// <summary>
+        /// On double click event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ListBox_DoubleClick(object sender, RoutedEventArgs e)
+        {
+            int index = listBox.SelectedIndex;
+            Password pas = new Password(mainController.PasswordManager.GetPassword(index));
+            DetailsWindow window = new DetailsWindow(pas); //add new constructor
+            if ((bool)window.ShowDialog() == false)
+            {
+                UpdateGUI();
+                return;
+            }
+            else
+            {
+                pas = new Password(window.GetName, window.Password);
+                if (mainController.PasswordManager.UpdatePassword(index, pas))
+                {
+                    UpdateGUI();
+                    return;
+                }
+            }
+
+        }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        #endregion
     }
 }

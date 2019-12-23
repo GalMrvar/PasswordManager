@@ -25,6 +25,17 @@ namespace PasswordManager
 
         }
 
+        /// <summary>
+        /// Copy constructor
+        /// </summary>
+        /// <param name="pas"></param>
+        public Password(Password pas)
+        {
+            name = pas.Name;
+            password = pas.VisiblePassword;
+            hash = pas.Hash;
+        }
+
         public Password(string name, string password)
         {
             this.name = name;

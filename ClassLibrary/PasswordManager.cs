@@ -82,7 +82,8 @@ namespace PasswordManager
         {
             foreach (Password password in passwords)
             {
-                password.VisiblePassword = Decrypt(password.Hash);
+                if(password.Hash.Length > 0)
+                    password.VisiblePassword = Decrypt(password.Hash);
             }
             return true;
         }
@@ -110,6 +111,27 @@ namespace PasswordManager
         public bool RemovePassword(int id)
         {
             passwords.RemoveAt(id);
+            return true;
+        }
+
+        /// <summary>
+        /// Getting password by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Password GetPassword(int id)
+        {
+            return passwords[id];
+        }
+
+        /// <summary>
+        /// Updating password
+        /// </summary>
+        /// <param name="pas"></param>
+        /// <returns></returns>
+        public bool UpdatePassword(int index, Password pas)
+        {
+            passwords[index] = pas;
             return true;
         }
 

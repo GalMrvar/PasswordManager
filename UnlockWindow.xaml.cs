@@ -74,7 +74,7 @@ namespace PasswordManager
             if (PasswordBox.Password.Length > 0)
             {
                 masterPassword = PasswordBox.Password;
-                this.Close();
+                this.DialogResult = true;
             }
             else
             {
