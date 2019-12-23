@@ -38,6 +38,14 @@ namespace PasswordManager
         #endregion
 
         #region Methods
+
+        private void UpdateGUI()
+        {
+            listBox.Items.Clear();
+            foreach (Password pas in mainController.PasswordManager.Passwords)
+                listBox.Items.Add(pas.Name);
+        }
+
         /// <summary>
         /// Add new button event for adding new passwords
         /// </summary>
@@ -47,12 +55,18 @@ namespace PasswordManager
         {
             DetailsWindow window = new DetailsWindow(); //add new constructor
             if ((bool)window.ShowDialog() == false)
+            {
+                UpdateGUI();
                 return;
+            }
             else
             {
                 Password pas = new Password(window.GetName, window.Password);
                 if (mainController.PasswordManager.AddIfPossible(pas))
+                {
+                    UpdateGUI();
                     return;
+                }
                 else
                 {
                     MessageBox.Show("Password with that name already exists");
@@ -131,5 +145,10 @@ namespace PasswordManager
         }
 
         #endregion
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
