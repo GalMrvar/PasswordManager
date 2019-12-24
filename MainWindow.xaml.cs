@@ -136,7 +136,8 @@ namespace PasswordManager
             if ((bool)window.ShowDialog() == false)
                 return;
 
-            mainController.PasswordManager.MasterPassword = window.MasterPassword;
+            mainController.PasswordManager.MasterPassword = window.MasterPassword; //setting master password
+            mainController.PasswordManager.EncryptPasswords(); //Encrypting passwords
             string fileName;
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();

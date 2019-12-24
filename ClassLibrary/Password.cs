@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace PasswordManager
 {
+    [Serializable]
     public class Password
     {
         #region fields
@@ -20,7 +22,7 @@ namespace PasswordManager
         /// <summary>
         /// Empty constructor
         /// </summary>
-        public Password()
+        public Password() //Default constructor for xml
         {
 
         }
@@ -62,6 +64,7 @@ namespace PasswordManager
             }
         }
 
+        [XmlIgnore]
         /// <summary>
         /// Get set password
         /// </summary>
