@@ -37,7 +37,13 @@ namespace PasswordManager
         {
             Title = "Edit password";
             InitializeComponent();
-            password = pas.VisiblePassword;
+            if (string.IsNullOrEmpty(pas.VisiblePassword))
+            {
+                password = "locked";
+                ButtonSave.IsEnabled = false;
+            }
+            else
+                password = pas.VisiblePassword;
             name = pas.Name;
             UpdateGUI();
         }

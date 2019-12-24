@@ -96,7 +96,6 @@ namespace PasswordManager
         private void ButtonUnlock_Click(object sender, RoutedEventArgs e)
         {
             UnlockWindow unlockWindow = new UnlockWindow();
-            unlockWindow.ShowDialog();
             if ((bool)unlockWindow.ShowDialog())
             {
                 mainController.PasswordManager.MasterPassword = unlockWindow.MasterPassword;
@@ -120,9 +119,10 @@ namespace PasswordManager
             {
                 fileName = openFileDialog1.FileName;  //important
                 string errorMsg = string.Empty;
-                //if (!mainFormController.EstateManager.BinaryDeserialize(fileName))
-                 //   MessageBox.Show("something went wrong please check for correct extension or corrupted file");
+                if (!mainController.OpenPaswords(fileName))
+                    MessageBox.Show("something went wrong please check for correct extension or corrupted file");
             }
+            UpdateGUI();
         }
 
         /// <summary>

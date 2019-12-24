@@ -41,13 +41,13 @@ namespace PasswordManager
         /// </summary>
         /// <param name="filname"></param>
         /// <returns></returns>
-        public static List<T> XmlDeserialize(string filename, List<T> obj)
+        public static List<T> XmlDeserialize(string filename)
         {
             XmlSerializer s = new XmlSerializer(typeof(List<T>));
             TextReader r = new StreamReader(filename);
             try
             {
-                return obj = (List<T>)s.Deserialize(r);
+                return (List<T>)s.Deserialize(r);
             }
             catch (Exception e)
             {

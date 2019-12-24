@@ -82,8 +82,17 @@ namespace PasswordManager
         {
             foreach (Password password in passwords)
             {
-                if(password.Hash.Length > 0)
-                    password.VisiblePassword = Decrypt(password.Hash);
+                if (!string.IsNullOrEmpty(password.Hash) && string.IsNullOrEmpty(password.VisiblePassword))
+                {
+                    try
+                    {
+                        password.VisiblePassword = Decrypt(password.Hash);
+
+                    }catch(Exception e) //In case of wrong password we just skip the exception
+                    {
+
+                    }
+                }
             }
             return true;
         }
@@ -142,7 +151,7 @@ namespace PasswordManager
         /// <returns></returns>
         private string Encrypt(string clearText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
+            string EncryptionKey = masterPassword;
             byte[] clearBytes = Encoding.Unicode.GetBytes(clearText);
             using (Aes encryptor = Aes.Create())
             {
@@ -167,9 +176,9 @@ namespace PasswordManager
         /// </summary>
         /// <param name="cipherText"></param>
         /// <returns></returns>
-        private static string Decrypt(string cipherText)
+        private string Decrypt(string cipherText)
         {
-            string EncryptionKey = "MAKV2SPBNI99212";
+            string EncryptionKey = masterPassword;
             byte[] cipherBytes = Convert.FromBase64String(cipherText);
             using (Aes encryptor = Aes.Create())
             {

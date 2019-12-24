@@ -53,7 +53,7 @@ namespace PasswordManager
         /// <returns></returns>
         public bool OpenPaswords(string filename)
         {
-            List<Password> list = StaticHelper<Password>.XmlDeserialize(filename, passwordManager.Passwords);
+            List<Password> list = StaticHelper<Password>.XmlDeserialize(filename);
             if (list == null)
             {
                 return false;
