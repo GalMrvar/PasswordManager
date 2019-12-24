@@ -81,7 +81,11 @@ namespace PasswordManager
         /// <param name="e"></param>
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
         {
-
+            int index = listBox.SelectedIndex;
+            if (index < 0)
+                return;
+            mainController.PasswordManager.RemovePassword(index); //removig password
+            UpdateGUI();
         }
 
         /// <summary>
@@ -157,6 +161,8 @@ namespace PasswordManager
         private void ListBox_DoubleClick(object sender, RoutedEventArgs e)
         {
             int index = listBox.SelectedIndex;
+            if (index < 0)
+                return;
             Password pas = new Password(mainController.PasswordManager.GetPassword(index));
             DetailsWindow window = new DetailsWindow(pas); //add new constructor
             if ((bool)window.ShowDialog() == false)
